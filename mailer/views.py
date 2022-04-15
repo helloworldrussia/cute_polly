@@ -28,9 +28,9 @@ def client_ask(request, email, type):
             obj.status = type
             obj.save()
             if type == 'subscribe':
-                return render(request, 'subscribe.html')
+                return render(request, 'core/subscribe.html')
             if type == 'unsubscribe':
-                return render(request, 'unsubscribe.html')
+                return render(request, 'core/unsubscribe.html')
         except:
             return HttpResponse(404)
     else:
@@ -38,7 +38,7 @@ def client_ask(request, email, type):
 
 
 class IndexView(TemplateView):
-    template_name = 'index.html'
+    template_name = 'core/index.html'
 
     def post(self, args):
         print(self.request.FILES, self.request.POST)
@@ -68,7 +68,7 @@ class IndexView(TemplateView):
 
 def add_emails(request):
     if request.method == 'GET':
-        return render(request, 'db.html')
+        return render(request, 'core/db.html')
     if request.method == 'POST':
         file = request.FILES['emails']
         fs.save(file.name, file)
@@ -77,12 +77,12 @@ def add_emails(request):
         message = save_new_emails(emails)
         # th = threading.Thread(target=save_new_emails, args=(emails,))
         # th.start()
-        return render(request, 'db.html', {'message': message})
+        return render(request, 'core/db.html', {'message': message})
 
 
 def invite(request):
     if request.method == 'GET':
-        return render(request, 'invite.html')
+        return render(request, 'core/invite.html')
     if request.method == 'POST':
         subject = request.POST['subject']
         callback = request.POST['callback']
@@ -90,14 +90,14 @@ def invite(request):
         emails_list = Address.objects.filter(status='new').values('email')
         emails_list = get_list_from_qs(emails_list)
         print(emails_list)
-        thread = threading.Thread(target=dispatcher, args=(emails_list, 'welcome.html', subject, callback, 'invite'))
+        thread = threading.Thread(target=dispatcher, args=(emails_list, 'core/welcome.html', subject, callback, 'invite'))
         thread.start()
         # расчитываем время работы и даем ответ
         integer = int(len(emails_list) / 70)
         if integer < 1:
             integer = 1
         message = f'Рассылка началась. Примерное время завершения: {integer} мин. Ответ придет на {callback}'
-        return render(request, 'invite.html', {'message': message})
+        return render(request, 'core/invite.html', {'message': message})
 
 
 # olga_list = ['arkatinka@gmail.com', 'New.superday@gmail.com', 'bartosevicdia`na@gmail.com',
