@@ -12,4 +12,5 @@ class Address(models.Model):
         return self.email
 
     class Meta:
-        verbose_name = 'База рассылки'
+        verbose_name = "Адрес"
+        verbose_name_plural = "Адреса"
