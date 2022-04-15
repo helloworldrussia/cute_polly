@@ -6,7 +6,7 @@
 </head>
 <body>
     <h1 style="text-align: center;">Авторизация</h1>
-    <form action="{% url 'login' %}" method="post">
+    <form action="{% url 'login' %}" name="form" method="post">
         {{ form }}
         {% csrf_token %}
         <button sype="submit" class="btn btn-danger">Ввод</button>
