@@ -81,7 +81,7 @@ def send(emails, template, subject): #, callback):
 
 # Access message to owner
 def send_good(emails_file, callback):
-    html_message = render_to_string(f'good.html')
+    html_message = render_to_string(f'core/good.html')
     plain_message = strip_tags(html_message)
     mail.send_mail(f'Отчет о рассылке по {emails_file}', plain_message, EUSER, [callback],
                    html_message=html_message)
