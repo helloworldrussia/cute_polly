@@ -39,8 +39,9 @@ def dispatcher(emails, template, subject, callback, context):
     # except Exception as error:
     #     #send_bad(emails_file, callback, result, error)
     #     print(f'Very BAAAD {error}')
-    # # удаляем файлы
-    fs_for_templates.delete(template)
+    # # удаляем файл
+    if context != 'invite':
+        fs_for_templates.delete(template)
 
 
 # читает имейлы из файла. всегда должны быть в файле столбцом
