@@ -1,0 +1,22 @@
+{% extends 'core/base.html' %}
+{% block content %}
+    {% if request.user.is_authenticated %}
+    <div style="margin-top: 100px;">
+    <h1 style="text-align: center;">Отправка приглашений</h1>
+    {% if message %}
+        <h5 style="text-align: center;">{{ message }}</h5>
+    {% else %}
+        <h5 style="text-align: center;">Укажите тему письма и нажмите кнопку "Отправить".<br>Приглашения будут автоматически высланы всем новым пользователям.</h5>
+    {% endif %}
+    <form class="row" enctype="multipart/form-data" method="post">
+     {% csrf_token %}
+      <input type="text" class="form-control" name="subject" placeholder="Тема письма">
+              <label for="callback" class="form-label"></label>
+      <input type="email" class="form-control" name="callback" placeholder="Ваша почта">
+      <button type="submit" class="btn btn-primary" id="1">Отправить</button>
+    </form>
+    </div>
+    {% else %}
+    <h1 style="text-align: center;">Авторизуйтесь</h1>
+    {% endif %}
+{% endblock content %}

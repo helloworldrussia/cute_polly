@@ -1,0 +1,4 @@
+environs
+django==3.2.9
+random
+time

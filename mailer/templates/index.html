@@ -1,0 +1,28 @@
+{% extends 'core/base.html' %}
+{% load static%}
+{% block content %}
+
+    {% if request.user.is_authenticated %}
+    <br>
+    <p class="h3 text-center">Welcome to Cute Polly e-mail sender!</p>
+    <form class="row" enctype="multipart/form-data" method="post">
+     {% csrf_token %}
+      <label for="template" class="form-label">Template.html</label>
+      <input class="form-control" type="file" name="template">
+      <!--<label for="emails" class="form-label">Emails.txt</label>
+      <input class="form-control" type="file" name="emails">-->
+      <label for="subject" class="form-label">E-Mail Subject</label>
+      <input type="text" class="form-control" name="subject" placeholder="About your Tik-Tok">
+      <label for="callback" class="form-label">Email address</label>
+      <input type="email" class="form-control" name="callback" placeholder="name@example.com">
+      <button type="submit" class="btn btn-primary" id="1">Отправить</button>
+    </form>
+    <!--<br><br><br>
+    <p class="h4 text-center">Выберите ваш шаблон, файл со списком адресов (каждый адрес с новой строки), тему письма.</p>
+    <p class="h4 text-center">Затем введите ваш адрес почты для отправки отчета и запустите рассылку кнопкой "SEND".</p>
+    <p class="h4 text-center" id="aboutsaving">Сохранение данных не предусмотренно.</p>-->
+    {% else %}
+    <h1 style="text-align: center;">Авторизуйтесь</h1>
+    {% endif %}
+
+{% endblock content %}

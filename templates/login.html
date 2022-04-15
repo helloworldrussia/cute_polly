@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Авторизация</title>
+</head>
+<body>
+    <h1 style="text-align: center;">Авторизация</h1>
+    <form action="{% url 'login' %}" method="post">
+        {{ form }}
+        {% csrf_token %}
+        <button sype="submit" class="btn btn-danger">Ввод</button>
+</body>
+</html>
