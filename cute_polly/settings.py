@@ -17,7 +17,7 @@ SECRET_KEY = SECRET
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1', '194.58.107.50']
 
 AUTH_USER_MODEL = 'accounts.User'
 
@@ -45,8 +45,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'cute_polly.urls'
-LOGIN_REDIRECT_URL = '/index'
-LOGOUT_REDIRECT_URL = '/index'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
 TEMPLATES_DIR = os.path.join(BASE_DIR, 'cute_polly', 'templates')
 TEMPLATES = [
     {
@@ -115,7 +115,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-
+STATIC_ROOT = '/var/www/cute_polly/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
