@@ -36,7 +36,7 @@ def send_mass_mail(data_list, context):
         template = data.pop('template')
         # context = data.pop('context')
         if context == 'invite':
-            html_content = get_rendered_html(template, {"invite_url": f"http://194.58.107.50:8000/email/subscribe/{data['recipients'][0]}"})
+            html_content = get_rendered_html(template, {"invite_url": f"http://194.58.107.50:777/email/subscribe/{data['recipients'][0]}"})
         else:
             html_content = get_rendered_html(template, context)
         data.update({'html_content': html_content})
