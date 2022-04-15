@@ -66,6 +66,7 @@ class IndexView(TemplateView):
         message = f'Рассылка началась. Примерное время завершения: {integer} мин. Ответ придет на {callback}'
         return render(self.request, 'core/index.html', {'message': message})
 
+
 def add_emails(request):
     if request.method == 'GET':
         return render(request, 'core/db.html')

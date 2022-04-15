@@ -1,5 +1,5 @@
 from django.conf import settings
-from django.core.mail import EmailMultiAlternatives
+from django.core.mail import EmailMultiAlternatives, EmailMessage
 from django.template.loader import render_to_string
 
 from config import EUSER
@@ -33,14 +33,27 @@ def send_email(subject, html_content, text_content=None, from_email=None, recipi
 
 def send_mass_mail(data_list, context):
     for data in data_list:
+        print('text_content', data['text_content'])
+        txt = f'\n\nПочтовый сервис izdatelstvo.skrebeyko.ru\nComplaints and abuse: abuse@izdatelstvo.skrebeyko.ru\nОтписаться: http://194.58.107.50:777/email/unsubscribe/{data["recipients"][0]}\nTelegram: @helloworldrussia'
+        subject, text_content, to = data['subject'], txt, data['recipients']
+        text_content = ''
+        headers = {"List-Unsubscribe": f"<http://194.58.107.50:777/email/unsubscribe/{to[0]}>"}
         template = data.pop('template')
         # context = data.pop('context')
         if context == 'invite':
-            html_content = get_rendered_html(template, {"invite_url": f"http://194.58.107.50:777/email/subscribe/{data['recipients'][0]}"})
+            html_content = get_rendered_html(template, {"invite_url": f"http://194.58.107.50:777/email/subscribe/{to[0]}",
+                                                        'unsub_url': f"http://194.58.107.50:777/email/unsubscribe/{to[0]}"})
         else:
-            html_content = get_rendered_html(template, context)
-        data.update({'html_content': html_content})
-        send_email(**data)
+            html_content = get_rendered_html(template, {'unsub_url': f"http://194.58.107.50:777/email/unsubscribe/{to[0]}"})
+        # data.update({'html_content': html_content})
+        # data['attachments'] = data["html_content"]
+        # del data["html_content"]
+        # email = EmailMessage(**data)
+        # email.send()
+        msg = EmailMultiAlternatives(subject, text_content, from_email, to, headers=headers)
+        msg.attach_alternative(html_content, "text/html")
+        msg.send()
+        # send_email(**data)
 
 
 # message2 = {
