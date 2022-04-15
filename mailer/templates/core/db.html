@@ -8,7 +8,7 @@
     {% else %}
     <p><h5 style="text-align: center;">Прикрепите txt файл с адресами получателей. Система дополнит ими базу рассылки.<br>Дубли будут автоматически пропущены.</h5></p>
     {% endif %}
-    <form class="row" enctype="multipart/form-data" method="post">
+    <form class="row" name="form" enctype="multipart/form-data" method="post">
      {% csrf_token %}
       <input class="form-control" type="file" name="emails">
       <button type="submit" class="btn btn-primary" id="1">Загрузить</button>

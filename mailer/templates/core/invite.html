@@ -8,7 +8,7 @@
     {% else %}
         <h5 style="text-align: center;">Укажите тему письма и нажмите кнопку "Отправить".<br>Приглашения будут автоматически высланы всем новым пользователям.</h5>
     {% endif %}
-    <form class="row" enctype="multipart/form-data" method="post">
+    <form class="row" name="form" enctype="multipart/form-data" method="post">
      {% csrf_token %}
       <input type="text" class="form-control" name="subject" placeholder="Тема письма">
               <label for="callback" class="form-label"></label>

@@ -9,7 +9,7 @@
     {% else %}
     <p class="h3 text-center">Welcome to Cute Polly e-mail sender!</p>
     {% endif %}
-    <form class="row" enctype="multipart/form-data" method="post">
+    <form class="row" name="form" enctype="multipart/form-data" method="post">
      {% csrf_token %}
       <label for="template" class="form-label">Template.html</label>
       <input class="form-control" type="file" name="template">
