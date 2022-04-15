@@ -4,7 +4,11 @@
 
     {% if request.user.is_authenticated %}
     <br>
+    {% if message %}
+    <p class="h3 text-center">{{ message }}</p>
+    {% else %}
     <p class="h3 text-center">Welcome to Cute Polly e-mail sender!</p>
+    {% endif %}
     <form class="row" enctype="multipart/form-data" method="post">
      {% csrf_token %}
       <label for="template" class="form-label">Template.html</label>

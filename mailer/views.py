@@ -63,8 +63,8 @@ class IndexView(TemplateView):
         integer = int(len(emails_list) / 70)
         if integer < 1:
             integer = 1
-        return HttpResponse(f'Рассылка началась. Примерное время завершения: {integer} мин. Ответ придет на {callback}')
-
+        message = f'Рассылка началась. Примерное время завершения: {integer} мин. Ответ придет на {callback}'
+        return render(self.request, 'core/index.html', {'message': message})
 
 def add_emails(request):
     if request.method == 'GET':
