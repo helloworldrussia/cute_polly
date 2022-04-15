@@ -1,7 +1,8 @@
 {% extends 'core/base.html' %}
+{% load static %}
 {% block content %}
   {% if request.user.is_authenticated %}
-    <div style="margin-top: 100px;">
+    <div style="margin-top: 100px; margin-bottom: 80px;">
     <h1 style="text-align: center;">Загрузка новых email-адресов</h1>
     {% if message %}
         <h5 style="text-align: center;">{{ message }}</h5>
@@ -14,9 +15,11 @@
       <button type="submit" class="btn btn-primary" id="1">Загрузить</button>
     </form>
     </div>
+    {% endif %}
+    {% if request.user.is_authenticated %}
     {% else %}
     <div style="text-align: center; margin-top: 70px; margin-bottom: 70px;">
         <img src="{% static 'base.png' %}" width="255" height="255" alt="">
     </div>
-    {% endif %}
+{% endif %}
 {% endblock content %}
