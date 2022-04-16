@@ -85,8 +85,8 @@ def send(emails, template, subject): #, callback):
 def send_good(emails_file, callback):
     html_message = render_to_string(f'core/good.html')
     plain_message = strip_tags(html_message)
-    mail.send_mail(f'Отчет о рассылке по {emails_file}', f'Рассылка прошла успешно [{datetime.now()}]', EUSER, [callback],
-                   html_message=html_message)
+    mail.send_mail(f'Отчет о рассылке по {emails_file}', f'Рассылка прошла успешно [{datetime.now()}]', EUSER, [callback])
+                   #html_message=html_message)
 
 
 # Error warning
