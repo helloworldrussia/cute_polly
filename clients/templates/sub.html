@@ -1,0 +1,15 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block content %}
+    <div style="text-align: center; margin-top: 20px; margin-bottom: 20px;">
+        <img src="{% static 'base.png' %}" width="150" height="150" alt="">
+    </div>
+  <div style="margin-top: 50px; margin-bottom: 100px;">
+    <form class="row" name="form" enctype="multipart/form-data" method="post">
+     {% csrf_token %}
+      <label for="email" class="form-label"></label>
+      <input type="text" class="form-control" name="email" placeholder="Ваш email-адрес">
+      <button type="submit" class="btn btn-primary" id="1">Подписаться</button>
+    </form>
+  </div>
+{% endblock content %}

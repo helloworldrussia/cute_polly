@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from mailer.models import Address
 
@@ -7,6 +7,7 @@ from mailer.models import Address
 def client_sub(request):
     if request.method == "POST":
         email = request.POST['email']
+        print(email)
         try:
             obj = Address.objects.get(email=email)
             obj.status = 'subscribe'
@@ -16,6 +17,6 @@ def client_sub(request):
             obj.email = email
             obj.status = 'subscribe'
             obj.save()
-        return HttpResponse(200)
+        return redirect('https://google.com')
     else:
-        return HttpResponse(404)
+        return render(request, 'sub.html')
