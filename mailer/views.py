@@ -22,17 +22,22 @@ fs_for_templates = FileSystemStorage(location='mailer/templates/')
 def client_ask(request, email, type):
     # email = request.GET['email']
     # type = request.GET['type']
+    print(email, type)
     if type == 'subscribe' or type == 'unsubscribe':
         try:
             obj = Address.objects.get(email=email)
             obj.status = type
             obj.save()
-            if type == 'subscribe':
-                return render(request, 'core/subscribe.html')
-            if type == 'unsubscribe':
-                return render(request, 'core/unsubscribe.html')
         except:
-            return HttpResponse(404)
+            obj = Address()
+            obj.email = email
+            obj.status = type
+            obj.save()
+
+        if type == 'subscribe':
+            return render(request, 'core/subscribe.html')
+        if type == 'unsubscribe':
+            return render(request, 'core/unsubscribe.html')
     else:
         return HttpResponse(404)
 

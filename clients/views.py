@@ -6,17 +6,18 @@ from mailer.models import Address
 
 def client_sub(request):
     if request.method == "POST":
-        email = request.POST['email']
-        print(email)
-        try:
-            obj = Address.objects.get(email=email)
-            obj.status = 'subscribe'
-            obj.save()
-        except:
-            obj = Address()
-            obj.email = email
-            obj.status = 'subscribe'
-            obj.save()
-        return redirect('https://google.com')
+        # email = request.POST['email']
+        # print(email)
+        # try:
+        #     obj = Address.objects.get(email=email)
+        #     obj.status = 'subscribe'
+        #     obj.save()
+        # except:
+        #     obj = Address()
+        #     obj.email = email
+        #     obj.status = 'subscribe'
+        #     obj.save()
+        # return redirect('https://google.com')
+        return render(request, 'sub.html')
     else:
         return render(request, 'sub.html')

@@ -8,8 +8,16 @@
     <form class="row" name="form" enctype="multipart/form-data" method="post">
      {% csrf_token %}
       <label for="email" class="form-label"></label>
-      <input type="text" class="form-control" name="email" placeholder="Ваш email-адрес">
-      <button type="submit" class="btn btn-primary" id="1">Подписаться</button>
+      <input type="text" class="form-control" id="email" name="email" placeholder="Ваш email-адрес">
+      <button type="submit" class="btn btn-primary" id="submit">Подписаться</button>
     </form>
   </div>
+    <script>
+        document.querySelector("#submit").onclick = function(){
+            const Http = new XMLHttpRequest();
+            const url='http://127.0.0.1:8000/email/subscribe/'+document.getElementById("email").value;
+            Http.open("GET", url);
+            Http.send();
+        }
+    </script>
 {% endblock content %}
