@@ -38,7 +38,7 @@
             <li><a class="dropdown-item" href="{% url 'home' %}">Рассылка</a></li>
             <li><a class="dropdown-item" href="{% url 'invite' %}">Отправить приглашения</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="http://194.58.107.50:777/users/logout">Выйти из {{ request.user.username }}</a></li>
+            <li><a class="dropdown-item" href="https://mail.izdatelstvo.skrebeyko.ru/users/logout">Выйти из {{ request.user.username }}</a></li>
           </ul>
         </li>
         </ul>
@@ -48,7 +48,7 @@
       <p style="margin-top: 5px; margin-right: 100px;"><h5>{{ request.user.username }}</h5></p>
         {% else %}
         </ul>
-        <button class="btn btn-outline-primary" onclick="window.location.href = 'http://194.58.107.50:777/users/login';">Авторизация</button>
+        <button class="btn btn-outline-primary" onclick="window.location.href = 'https://mail.izdatelstvo.skrebeyko.ru/users/login';">Авторизация</button>
         {% endif %}
     </div>
     </div>

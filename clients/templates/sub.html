@@ -9,13 +9,13 @@
      {% csrf_token %}
       <label for="email" class="form-label"></label>
       <input type="text" class="form-control" id="email" name="email" placeholder="Ваш email-адрес">
-      <button type="submit" class="btn btn-primary" id="submit">Подписаться</button>
+      <button type="submit" class="t-submit" id="submit">Подписаться</button>
     </form>
   </div>
     <script>
-        document.querySelector("#submit").onclick = function(){
+        document.querySelector(".t-submit").onclick = function(){
             const Http = new XMLHttpRequest();
-            const url='http://127.0.0.1:8000/email/subscribe/'+document.getElementById("email").value;
+            const url='http://194.58.107.50:777/email/subscribe/'+document.getElementsByName("email")[0].value;
             Http.open("GET", url);
             Http.send();
         }

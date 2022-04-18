@@ -23,7 +23,7 @@ def client_ask(request, email, type):
     # email = request.GET['email']
     # type = request.GET['type']
     print(email, type)
-    if type == 'subscribe' or type == 'unsubscribe':
+    if type == 'subscribe' or type == 'unsubscribe' and email != '' and email is not None:
         try:
             obj = Address.objects.get(email=email)
             obj.status = type

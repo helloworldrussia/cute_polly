@@ -17,7 +17,7 @@ SECRET_KEY = SECRET
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '194.58.107.50']
+ALLOWED_HOSTS = ['mail.izdatelstvo.skrebeyko.ru', '194.58.107.50']
 
 AUTH_USER_MODEL = 'accounts.User'
 
