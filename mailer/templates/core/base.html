@@ -28,7 +28,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" href="{% url 'download' %}">Панель управления</a>
+          <a class="nav-link active" href="https://mail.izdatelstvo.skrebeyko.ru/l-cab">Панель управления</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -37,6 +37,7 @@
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item" href="{% url 'home' %}">Рассылка</a></li>
             <li><a class="dropdown-item" href="{% url 'invite' %}">Отправить приглашения</a></li>
+             <li><a class="dropdown-item" href="{% url 'download' %}">Загрузить адреса</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="https://mail.izdatelstvo.skrebeyko.ru/users/logout">Выйти из {{ request.user.username }}</a></li>
           </ul>
