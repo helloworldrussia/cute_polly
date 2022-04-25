@@ -14,8 +14,8 @@
   </div>
     <script>
         document.querySelector(".t-submit").onclick = function(){
-            const Http = new XMLHttpRequest();
-            const url='http://194.58.107.50:777/email/subscribe/'+document.getElementsByName("email")[0].value;
+            var Http = new XMLHttpRequest();
+            var url='https://mail.izdatelstvo.skrebeyko/email/subscribe/'+document.getElementsByName("email")[0].value;
             Http.open("GET", url);
             Http.send();
         }

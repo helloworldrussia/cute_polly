@@ -37,14 +37,14 @@ def send_mass_mail(data_list, context):
         txt = f'\n\nПочтовый сервис izdatelstvo.skrebeyko.ru\nComplaints and abuse: abuse@izdatelstvo.skrebeyko.ru\nОтписаться: http://194.58.107.50:777/email/unsubscribe/{data["recipients"][0]}\nTelegram: @helloworldrussia'
         subject, text_content, to = data['subject'], txt, data['recipients']
         text_content = ''
-        headers = {"List-Unsubscribe": f"<http://194.58.107.50:777/email/unsubscribe/{to[0]}>"}
+        headers = {"List-Unsubscribe": f"<http://mail.izdatelstvo.skrebeyko.ru/email/unsubscribe/{to[0]}>"}
         template = data.pop('template')
         # context = data.pop('context')
         if context == 'invite':
-            html_content = get_rendered_html(template, {"invite_url": f"http://194.58.107.50:777/email/subscribe/{to[0]}",
-                                                        'unsub_url': f"http://194.58.107.50:777/email/unsubscribe/{to[0]}"})
+            html_content = get_rendered_html(template, {"invite_url": f"http://mail.izdatelstvo.skrebeyko.ru/email/subscribe/{to[0]}",
+                                                        'unsub_url': f"http://mail.izdatelstvo.skrebeyko.ru/email/unsubscribe/{to[0]}"})
         else:
-            html_content = get_rendered_html(template, {'unsub_url': f"http://194.58.107.50:777/email/unsubscribe/{to[0]}"})
+            html_content = get_rendered_html(template, {'unsub_url': f"http://mail.izdatelstvo.skrebeyko.ru/email/unsubscribe/{to[0]}"})
         # data.update({'html_content': html_content})
         # data['attachments'] = data["html_content"]
         # del data["html_content"]
