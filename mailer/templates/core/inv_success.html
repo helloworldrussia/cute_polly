@@ -1,0 +1,10 @@
+{% extends 'core/inv_base.html' %}
+{% block content %}
+<h3 style="text-align: center;">Вы успешно подписались на рассылку!<br>Мы будем отправлять вам письма на {{ user_email }}</h3><br><br>
+<div style="text-align:center;">
+    <form method="POST">
+        {% csrf_token %}
+        <button class="btn btn-dark btn-lg" type="submit"  style="text-align:center; color: white;background-color: #ff5500;border-color: #ff5500;">В издательство</button>
+    </form>
+</div>
+{% endblock content %}

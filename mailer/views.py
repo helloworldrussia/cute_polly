@@ -12,7 +12,8 @@ from django.utils.html import strip_tags
 from django.views.generic import TemplateView
 from config import EUSER
 from mailer.backend import disp
-from mailer.mixins import dispatcher, read_emails, save_new_emails,get_list_from_qs
+from mailer.mixins import dispatcher, read_emails, save_new_emails, get_list_from_qs, save_or_update_email, \
+    check_session
 from mailer.models import Address
 
 fs = FileSystemStorage(location='static/users_files')
@@ -108,13 +109,20 @@ def invite(request):
 
 def inv_form(request):
     if request.method == 'POST':
-        try:
-            obj = Address()
-            obj.email = request.POST['email']
-            obj.status = 'subscribe'
-            obj.save()
-        except:
-            pass
-        return redirect('https://izdatelstvo.skrebeyko.ru')
+        if check_session(request.session):
+            request.session['invite_form_mode'] = ''
+            try:
+                email = request.POST['email']
+            except:
+                return redirect('https://izdatelstvo.skrebeyko.ru')
+
+        email = request.POST['email']
+        if email == '':
+            return render(request, 'core/inv_form.html', {"message": "Вы отправили нам пустую строку"})
+
+        if save_or_update_email(email):
+            request.session['invite_form_mode'] = '1'
+            return render(request, 'core/inv_success.html', {"user_email": email})
+
     if request.method == 'GET':
         return render(request, 'core/inv_form.html')

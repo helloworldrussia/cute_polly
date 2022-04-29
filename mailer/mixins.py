@@ -3,6 +3,7 @@ import time
 from datetime import datetime
 
 from django.core import mail
+from django.core.exceptions import ValidationError
 from django.core.files.storage import FileSystemStorage
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
@@ -121,3 +122,31 @@ def get_list_from_qs(qs):
         print(x)
         emails.append(x['email'])
     return emails
+
+
+def save_or_update_email(email):
+    try:
+        obj = Address()
+        obj.email = email
+        obj.status = 'subscribe'
+        obj.save()
+    except ValidationError:
+        try:
+            obj = Address.objects.get(email=email)
+            obj.status = 'subscribe'
+            obj.save()
+        except:
+            return False
+    except:
+        return False
+    return True
+
+
+def check_session(s):
+    try:
+        if s['invite_form_mode'] == '1':
+            return True
+        else:
+            return False
+    except:
+        return False
