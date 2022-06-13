@@ -1,6 +1,5 @@
 import threading
 import time
-
 from django.core.mail import send_mail, send_mass_mail, EmailMessage
 from django.core.mail.backends.smtp import EmailBackend
 from django.core.files.storage import FileSystemStorage
