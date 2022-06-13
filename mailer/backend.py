@@ -37,7 +37,7 @@ def send_mass_mail(data_list, context):
         txt = f'\n\nПочтовый сервис izdatelstvo.skrebeyko.ru\nComplaints and abuse: abuse@izdatelstvo.skrebeyko.ru\nОтписаться: http://194.58.107.50:777/email/unsubscribe/{data["recipients"][0]}\nTelegram: @helloworldrussia'
         subject, text_content, to = data['subject'], txt, data['recipients']
         text_content = ''
-        headers = {"List-Unsubscribe": f"<https://mail.izdatelstvo.skrebeyko.ru/email/unsubscribe/{to[0]}>"}
+        headers = {"List-Unsubscribe": f"https://mail.izdatelstvo.skrebeyko.ru/email/unsubscribe/{to[0]}"}
         template = data.pop('template')
         # context = data.pop('context')
         if context == 'invite':
