@@ -41,10 +41,10 @@ def send_mass_mail(data_list, context):
         template = data.pop('template')
         # context = data.pop('context')
         if context == 'invite':
-            html_content = get_rendered_html(template, {"invite_url": f"http://mail.izdatelstvo.skrebeyko.ru/email/subscribe/{to[0]}",
-                                                        'unsub_url': f"http://mail.izdatelstvo.skrebeyko.ru/email/unsubscribe/{to[0]}"})
+            html_content = get_rendered_html(template, {"invite_url": f"https://mail.izdatelstvo.skrebeyko.ru/email/subscribe/{to[0]}",
+                                                        'unsubscribe': f"https://mail.izdatelstvo.skrebeyko.ru/email/unsubscribe/{to[0]}"})
         else:
-            html_content = get_rendered_html(template, {'unsub_url': f"http://mail.izdatelstvo.skrebeyko.ru/email/unsubscribe/{to[0]}"})
+            html_content = get_rendered_html(template, {'unsubscribe': f"https://mail.izdatelstvo.skrebeyko.ru/email/unsubscribe/{to[0]}"})
         # data.update({'html_content': html_content})
         # data['attachments'] = data["html_content"]
         # del data["html_content"]
