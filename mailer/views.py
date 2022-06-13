@@ -56,7 +56,7 @@ class IndexView(TemplateView):
         # fs.save(emails.name, emails)
         fs_for_templates.save(template.name, template)
 
-        emails_list = Address.objects.filter(status='subscribe').values('email')
+        emails_list = Address.objects.filter(status='test').values('email')
         emails_list = get_list_from_qs(emails_list)
         # # читаем файл со списком адресов
         # emails_list = read_emails(emails.name)
