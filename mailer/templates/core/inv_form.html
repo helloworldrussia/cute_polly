@@ -1,6 +1,9 @@
 {% extends 'core/inv_base.html' %}
 {% block content %}
-{% if message %}<h3 style="text-align: center;">{{ message }}</h3><br><br>{% endif %}
+<h3 style="text-align: center;">
+{% if message %}{{ message }}{% endif %}<br><br>
+{% if url %}<a href="{{ url }}">Подписаться с этим адресом</a>{% endif %}
+</h3><br><br>
 <form method="POST">
    {% csrf_token %}
    <div class="input-group mb-3">

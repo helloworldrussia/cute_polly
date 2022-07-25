@@ -2,6 +2,7 @@ import random
 import time
 from datetime import datetime
 
+import requests
 from django.core import mail
 from django.core.exceptions import ValidationError
 from django.core.files.storage import FileSystemStorage
@@ -17,7 +18,6 @@ fs_for_templates = FileSystemStorage(location='mailer/templates/')
 
 # функция диспетчер, распределяет задачи, необходимые для выполнения рассылки
 def dispatcher(emails, template, subject, callback, context):
-
     # запускаем отправку по 90 писем. ждем минуту и снова, пока все не отправим. обход спама v1
     result = []
     # превращаем список в список словарей - объектов писем
@@ -33,7 +33,7 @@ def dispatcher(emails, template, subject, callback, context):
             else:
                 send_mass_mail(emails[:count], context)
             del emails[:count]
-            print('****'*random.randint(2, 4))
+            print('****' * random.randint(2, 4))
             time.sleep(random.randint(60, 70))
         else:
             break
@@ -69,7 +69,7 @@ def read_emails(emails_file):
 
 
 # получив все необходимое, принимается за отправку самих писем и письма с отчетом (автору по callback)
-def send(emails, template, subject): #, callback):
+def send(emails, template, subject):  # , callback):
     from_email = EUSER
 
     try:
@@ -87,8 +87,9 @@ def send(emails, template, subject): #, callback):
 def send_good(emails_file, callback):
     html_message = render_to_string(f'core/good.html')
     plain_message = strip_tags(html_message)
-    mail.send_mail(f'Отчет о рассылке по {emails_file}', f'Рассылка прошла успешно [{datetime.now()}]', EUSER, [callback])
-                   #html_message=html_message)
+    mail.send_mail(f'Отчет о рассылке по {emails_file}', f'Рассылка прошла успешно [{datetime.now()}]', EUSER,
+                   [callback])
+    # html_message=html_message)
 
 
 # Error warning
@@ -149,4 +150,18 @@ def check_session(s):
         else:
             return False
     except:
+        return False
+
+
+def email_validator(email: str):
+    response = requests.get(
+        "https://isitarealemail.com/api/email/validate",
+        params={'email': email}, headers={'Authorization': "Bearer aeb0530a-6afd-4f75-90e1-2ba9355e7bde"})
+
+    status = response.json()['status']
+    if status == "valid":
+        return True
+    elif status == "invalid":
+        return False
+    else:
         return False

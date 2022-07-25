@@ -12,7 +12,7 @@ from django.views.generic import TemplateView
 from config import EUSER
 from mailer.backend import disp
 from mailer.mixins import dispatcher, read_emails, save_new_emails, get_list_from_qs, save_or_update_email, \
-    check_session
+    check_session, email_validator
 from mailer.models import Address
 
 fs = FileSystemStorage(location='static/users_files')
@@ -116,9 +116,18 @@ def inv_form(request):
                 return redirect('https://izdatelstvo.skrebeyko.ru')
 
         email = request.POST['email']
+        # если поле имейла оставили пустым, выбрасываем сообщение об ошибке
         if email == '':
             return render(request, 'core/inv_form.html', {"message": "Вы отправили нам пустую строку"})
-
+        # проверяем введенный имейл на существование, аналогично выбрасываем ошибку при ошибке))
+        if not email_validator(email):
+            url = f'https://mail.izdatelstvo.skrebeyko.ru/email/subscribe/{email}'
+            return render(request, 'core/inv_form.html', {"message": f"Адрес почты {email} определен как несуществующий."
+                                                                     " Пожалуйста, проверьте введенные данные.\n"
+                                                                     "Попробуйте исправить или ввести другой email.\n\n"
+                                                                     "Если адрес почты введен верно, перейдите "
+                                                                     f"по ссылке.",
+                                                          "url": url})
         if save_or_update_email(email):
             request.session['invite_form_mode'] = '1'
             return render(request, 'core/inv_success.html', {"user_email": email})
