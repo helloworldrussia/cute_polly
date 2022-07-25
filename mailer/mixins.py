@@ -38,7 +38,7 @@ def dispatcher(emails, template, subject, callback, context):
         else:
             break
         print('Sending GOOD')
-        send_good('База Адресов', callback)
+    send_good('База Адресов', callback)
     # except Exception as error:
     #     #send_bad(emails_file, callback, result, error)
     #     print(f'Very BAAAD {error}')
