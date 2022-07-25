@@ -122,11 +122,11 @@ def inv_form(request):
         # проверяем введенный имейл на существование, аналогично выбрасываем ошибку при ошибке))
         if not email_validator(email):
             url = f'https://mail.izdatelstvo.skrebeyko.ru/email/subscribe/{email}'
-            return render(request, 'core/inv_form.html', {"message": f"Адрес почты\n\n{email}\n\nопределен как несуществующий."
-                                                                     " Пожалуйста, проверьте введенные данные.\n"
-                                                                     "Попробуйте исправить или ввести другой email.\n\n"
-                                                                     "Если адрес почты введен верно, перейдите "
-                                                                     f"по ссылке.",
+            return render(request, 'core/inv_form.html', {"message": f"Ой! Кажется, в адрес {email} "
+                                                                     f"закралась ошибка. "
+                                                                     f"Пожалуйста, проверьте внимательно и введите "
+                                                                     f"другой email. Если же адрес верный,"
+                                                                     f" перейдите по ссылке.",
                                                           "url": url})
         if save_or_update_email(email):
             request.session['invite_form_mode'] = '1'
